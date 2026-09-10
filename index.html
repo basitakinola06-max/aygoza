@@ -815,7 +815,9 @@ async function loadProducts() {
 }
 
 loadProducts();function openSeller() {
-  document.getElementById("sellerForm").style.display = "flex";
+  const seller
+  =document.getElementById("sellerForm");if (seller) {seller.style.display = 'block';}
+  }
 }
 </div>
 function closeSeller(){

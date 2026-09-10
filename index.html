@@ -855,7 +855,13 @@ async function registerSeller(){
 
   message.innerText = "✅ Seller profile created successfully!";
             }
-</script><div id="sellerForm" style="
+</script>
+  document.querySelectorAll("button").forEach(function(button){
+  if(button.innerText.includes("Become a Seller")){
+    button.onclick = openSeller;
+  }
+});
+  <div id="sellerForm" style="
 display:none;
 position:fixed;
 inset:0;
@@ -921,8 +927,4 @@ justify-content:center;
 </div>
 </body>
 </html>
-document.querySelectorAll("button").forEach(function(button){
-  if(button.innerText.includes("Become a Seller")){
-    button.onclick = openSeller;
-  }
-});
+

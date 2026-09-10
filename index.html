@@ -817,7 +817,112 @@ async function loadProducts() {
   `).join("");
 }
 
-loadProducts();
-</script>
+loadProducts();function openSeller(){
+  document.getElementById("sellerForm").style.display = "flex";
+}
+
+function closeSeller(){
+  document.getElementById("sellerForm").style.display = "none";
+}
+
+async function registerSeller(){
+
+  const name = document.getElementById("sellerName").value.trim();
+  const phone = document.getElementById("sellerPhone").value.trim();
+  const email = document.getElementById("sellerEmail").value.trim();
+  const location = document.getElementById("sellerLocation").value.trim();
+  const message = document.getElementById("sellerMessage");
+
+  if(!name || !phone || !location){
+    message.innerText = "Please enter your name, phone and location.";
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("sellers")
+    .insert({
+      name: name,
+      phone: phone,
+      email: email,
+      location: location
+    });
+
+  if(error){
+    console.error(error);
+    message.innerText = "Something went wrong. Please try again.";
+    return;
+  }
+
+  message.innerText = "✅ Seller profile created successfully!";
+            }
+</script><div id="sellerForm" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+z-index:999;
+padding:20px;
+align-items:center;
+justify-content:center;
+">
+  <div style="
+  background:white;
+  width:100%;
+  max-width:450px;
+  padding:25px;
+  border-radius:16px;
+  ">
+    <h2>🏪 Become an AYGOZA Seller</h2>
+
+    <p style="margin:10px 0 20px;color:#6b7280;">
+      Create your seller profile.
+    </p>
+
+    <input id="sellerName"
+      placeholder="Your name or business name"
+      style="width:100%;padding:13px;margin-bottom:10px;">
+
+    <input id="sellerPhone"
+      placeholder="Phone number"
+      style="width:100%;padding:13px;margin-bottom:10px;">
+
+    <input id="sellerEmail"
+      placeholder="Email (optional)"
+      style="width:100%;padding:13px;margin-bottom:10px;">
+
+    <input id="sellerLocation"
+      placeholder="Location"
+      style="width:100%;padding:13px;margin-bottom:15px;">
+
+    <button onclick="registerSeller()" style="
+      width:100%;
+      padding:13px;
+      background:#7c3aed;
+      color:white;
+      border:0;
+      border-radius:9px;
+      ">
+      Create Seller Profile
+    </button>
+
+    <button onclick="closeSeller()" style="
+      width:100%;
+      padding:11px;
+      margin-top:8px;
+      background:#eee;
+      border:0;
+      border-radius:9px;
+      ">
+      Cancel
+    </button>
+
+    <p id="sellerMessage" style="margin-top:15px;"></p>
+  </div>
+</div>
 </body>
 </html>
+document.querySelectorAll("button").forEach(function(button){
+  if(button.innerText.includes("Become a Seller")){
+    button.onclick = openSeller;
+  }
+});

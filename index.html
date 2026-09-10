@@ -769,6 +769,55 @@ function showCart(){
 }
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = https://tuqtnjeuqeysjbpaouef.supabase.co/rest/v1/
+const SUPABASE_KEY = sb_publishable_UH1scs-Lz8XKZxo3_mDINA_H9polzJr
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function loadProducts() {
+
+  const { data, error } = await supabaseClient
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("AYGOZA database error:", error);
+    return;
+  }
+
+  const container = document.querySelector(".products");
+
+  container.innerHTML = data.map(product => `
+    <div class="product">
+      <div class="product-image">
+        ${product.image_url
+          ? `<img src="${product.image_url}" style="width:100%;height:100%;object-fit:cover;">`
+          : "🛍️"}
+        <button class="heart" onclick="favorite(this)">♡</button>
+      </div>
+
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <div class="price">₦${Number(product.price).toLocaleString()}</div>
+        <div class="seller">
+          ${product.seller_name} • ${product.location || ""}
+        </div>
+        <button class="add-cart" onclick="addCart()">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+loadProducts();
+</script>
 </body>
 </html>

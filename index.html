@@ -814,18 +814,21 @@ async function loadProducts() {
   `).join("");
 }
 
-loadProducts();function openSeller() {
-  const seller
-  =document.getElementById("sellerForm");if (seller) {seller.style.display = 'block';}
+loadProducts();
+
+  function openSeller() {
+  const seller = document.getElementById("sellerForm");
+  if (seller) {
+    seller.style.display = "flex";
   }
 }
-</div>
-function closeSeller(){
-  document.getElementById("sellerForm").style.display = "none";
+
+function closeSeller() {
+  const seller = document.getElementById("sellerForm");
+  if (seller) {
+    seller.style.display = "none";
+  }
 }
-
-async function registerSeller(){
-
   const name = document.getElementById("sellerName").value.trim();
   const phone = document.getElementById("sellerPhone").value.trim();
   const email = document.getElementById("sellerEmail").value.trim();

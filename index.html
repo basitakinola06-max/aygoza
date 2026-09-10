@@ -815,8 +815,7 @@ async function loadProducts() {
 }
 
 loadProducts();
-
-  function openSeller() {
+function openSeller() {
   const seller = document.getElementById("sellerForm");
   if (seller) {
     seller.style.display = "flex";
@@ -829,6 +828,8 @@ function closeSeller() {
     seller.style.display = "none";
   }
 }
+  async function registerSeller (){
+  const seller = document.getElementById("sellerForm"
   const name = document.getElementById("sellerName").value.trim();
   const phone = document.getElementById("sellerPhone").value.trim();
   const email = document.getElementById("sellerEmail").value.trim();
